@@ -62,6 +62,42 @@ curl http://localhost:8080/api/pos/1 # add valid POS id here
 curl --header "Content-Type: application/json" --request POST --data '{"name":"New Café","description":"Description","type":"CAFE","campus":"ALTSTADT","street":"Hauptstraße","houseNumber":"100","postalCode":69117,"city":"Heidelberg"}' http://localhost:8080/api/pos
 ```
 
+### Aufgabe 3.2(c) — Commands used
+
+1) Start Postgres (ensure Docker daemon is running):
+
+```shell
+docker run -d -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 postgres:17-alpine
+```
+
+2) Start the application (dev profile):
+
+```shell
+cd application
+mvn spring-boot:run -Dspring-boot.run.profiles=dev
+```
+
+3) Create POS (example payload; adjust if needed):
+
+```shell
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"name":"Bäckerei Kohlmann","description":"Traditional bakery and café","type":"BAKERY","campus":"ALTSTADT","street":"Hauptstraße","houseNumber":"100","postalCode":69117,"city":"Heidelberg"}' \
+  http://localhost:8080/api/pos
+```
+
+4) Retrieve all POS:
+
+```shell
+curl http://localhost:8080/api/pos
+```
+
+5) Retrieve POS by ID (replace 1 with returned id):
+
+```shell
+curl http://localhost:8080/api/pos/1
+```
+
 #### Update POS
 
 Update title and description:
